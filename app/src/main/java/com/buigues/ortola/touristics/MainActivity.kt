@@ -1,17 +1,20 @@
 package com.buigues.ortola.touristics
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.buigues.ortola.touristics.model.database.AppDatabase
+import androidx.appcompat.app.AppCompatActivity
 import com.buigues.ortola.touristics.repository.FirebaseRepository
-import com.buigues.ortola.touristics.repository.LocalRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val firebase = FirebaseRepository(application)
-        firebase.dumpDataFromFirebase()
+        CoroutineScope(Dispatchers.IO).launch {
+            val firebase = FirebaseRepository(application)
+            firebase.dumpDataFromFirebase()
+        }
     }
 }

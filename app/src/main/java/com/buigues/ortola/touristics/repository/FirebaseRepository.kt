@@ -1,16 +1,17 @@
 package com.buigues.ortola.touristics.repository
 
 import android.app.Application
-import com.buigues.ortola.touristics.TouristicsApp
-import com.buigues.ortola.touristics.model.dao.RouteDao
 import com.buigues.ortola.touristics.model.database.AppDatabase
 import com.buigues.ortola.touristics.model.entity.Route
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FirebaseRepository @Inject constructor(val application: Application)
+class FirebaseRepository @Inject constructor(private val application: Application)
 {
     fun dumpDataFromFirebase() {
         getRouteFromId("0")
@@ -30,7 +31,9 @@ class FirebaseRepository @Inject constructor(val application: Application)
                 historicPeriod = dataMap["historicPeriod"].toString(),
                 imageUrl = dataMap["imageUrl"].toString()
             )
-            AppDatabase.getInstance(application).routeDao.insertRoute(route)
+            CoroutineScope(Dispatchers.IO).launch {
+                AppDatabase.getInstance(application).routeDao.insertRoute(route)
+            }
         }
     }
 }

@@ -15,11 +15,11 @@ import androidx.room.PrimaryKey
         onUpdate = CASCADE
     )])
 data class PointOfInterest(
-    @PrimaryKey(autoGenerate = false) private val id: Int,
-    @ColumnInfo(name = "title") private val title: String,
-    @ColumnInfo(name = "description") private val description: String,
-    @ColumnInfo(name = "latitude") private val latitude: Double,
-    @ColumnInfo(name = "longitude") private val longitude: Double,
-    @ColumnInfo(name = "image_url") private val imageUrl: String,
-    @ColumnInfo(name = "route_id") private val routeId: Int
+    @PrimaryKey(autoGenerate = false) val id: Int,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "latitude") val latitude: Double,
+    @ColumnInfo(name = "longitude") val longitude: Double,
+    @ColumnInfo(name = "image_url") val imageUrl: String,
+    @ColumnInfo(name = "route_id") val routeId: Int
 )

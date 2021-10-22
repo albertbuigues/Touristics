@@ -8,5 +8,5 @@ import com.buigues.ortola.touristics.model.entity.Route
 interface RouteDao
 {
     @Insert
-    fun insertRoute(route: Route)
+    suspend fun insertRoute(route: Route)
 }
