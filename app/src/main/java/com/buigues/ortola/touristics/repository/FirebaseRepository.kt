@@ -1,6 +1,7 @@
 package com.buigues.ortola.touristics.repository
 
 import android.app.Application
+import android.graphics.Point
 import com.buigues.ortola.touristics.model.database.AppDatabase
 import com.buigues.ortola.touristics.model.entity.PointOfInterest
 import com.buigues.ortola.touristics.model.entity.Route
@@ -42,6 +43,7 @@ class FirebaseRepository @Inject constructor(private val application: Applicatio
 
     private fun getRoutePoints(route: Route, routeId: String) {
         val dbReference = FirebaseDatabase.getInstance().getReference("/routes/$routeId")
+        val listOfPoints: MutableList<PointOfInterest> = mutableListOf()
         dbReference.child("pointsOfInterest").get().addOnSuccessListener { pointsArray ->
             pointsArray.children.forEach { point ->
                 val dataMap = point.value as Map<*, *>
@@ -56,8 +58,11 @@ class FirebaseRepository @Inject constructor(private val application: Applicatio
                     imageUrl = dataMap["imageUrl"].toString(),
                     routeId = routeIdToInsert
                 )
-                CoroutineScope(Dispatchers.IO).launch {
-                    AppDatabase.getInstance(application).pointDao.insertPointByRoute(route, pointOfInterest)
+                listOfPoints.add(id, pointOfInterest)
+                if (pointsArray.children.count() == listOfPoints.size) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        AppDatabase.getInstance(application).routeDao.insertRoutePoints(listOfPoints)
+                    }
                 }
             }
         }
