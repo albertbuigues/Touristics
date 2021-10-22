@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "496713796010",
+    "firebase_url": "https://touristics-8ff1d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "touristics-8ff1d",
+    "storage_bucket": "touristics-8ff1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496713796010:android:8145e9e237a169d32b43d3",
+        "android_client_info": {
+          "package_name": "com.buigues.ortola.touristics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496713796010-aop50c0htgp917g6h97t9uk532dnsn5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM9Tb9KaHAei_C92gF0DIoBbuJu_aTTJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496713796010-aop50c0htgp917g6h97t9uk532dnsn5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
