@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.buigues.ortola.touristics.model.dao.PointOfInterestDao
 import com.buigues.ortola.touristics.model.dao.RouteDao
 import com.buigues.ortola.touristics.model.entity.PointOfInterest
 import com.buigues.ortola.touristics.model.entity.Route
@@ -13,7 +12,6 @@ import com.buigues.ortola.touristics.model.entity.Route
 abstract class AppDatabase: RoomDatabase()
 {
     abstract val routeDao: RouteDao
-    abstract val pointDao: PointOfInterestDao
 
     companion object {
 

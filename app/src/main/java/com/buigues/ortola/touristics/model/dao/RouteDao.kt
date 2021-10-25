@@ -11,7 +11,7 @@ import com.buigues.ortola.touristics.model.entity.Route
 @Dao
 interface RouteDao
 {
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = IGNORE)
     suspend fun insertRoute(route: Route)
 
     @Query("SELECT * FROM routes_tbl")
