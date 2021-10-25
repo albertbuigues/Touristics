@@ -1,7 +1,6 @@
 package com.buigues.ortola.touristics.repository
 
 import android.app.Application
-import android.graphics.Point
 import com.buigues.ortola.touristics.model.database.AppDatabase
 import com.buigues.ortola.touristics.model.entity.PointOfInterest
 import com.buigues.ortola.touristics.model.entity.Route
@@ -9,11 +8,8 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class FirebaseRepository @Inject constructor(private val application: Application)
+class FirebaseRepository (private val application: Application)
 {
     private var counter = 0
     private val listOfPoints: MutableList<PointOfInterest> = mutableListOf()
