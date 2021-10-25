@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: RoutesListAdapter
     private val routesListViewModel: RoutesListViewModel by viewModels()
+    private lateinit var myAdapter: RoutesListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerRoutes
-        CoroutineScope(Dispatchers.IO).launch {
-            adapter = RoutesListAdapter(routesListViewModel.dbRoutes)
-        }
+        myAdapter = RoutesListAdapter(routesListViewModel.dbRoutes)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = myAdapter
     }
 }

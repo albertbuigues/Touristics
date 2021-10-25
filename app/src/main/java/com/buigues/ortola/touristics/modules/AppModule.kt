@@ -26,4 +26,8 @@ object AppModule
             "myDatabase"
         ).build()
     }
+
+    @Singleton
+    @Provides
+    fun provideRoutesDao(db: AppDatabase): RouteDao = db.routeDao
 }

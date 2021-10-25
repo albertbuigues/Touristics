@@ -4,11 +4,11 @@
     package="com.buigues.ortola.touristics">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name="com.buigues.ortola.touristics.TouristicsApplication"
         android:fullBackupOnly="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".TouristicsApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Touristics">

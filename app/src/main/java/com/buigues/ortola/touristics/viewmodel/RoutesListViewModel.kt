@@ -13,16 +13,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RoutesListViewModel @Inject constructor(
-    private val roomRepository: RoomRepository,
-    private val firebaseRepository: FirebaseRepository,
+    roomRepository: RoomRepository,
+    firebaseRepository: FirebaseRepository,
 ) : ViewModel()
 {
-    lateinit var dbRoutes: List<Route>
+    var dbRoutes: List<Route> = roomRepository.getAllRoutes()
 
     init {
-        CoroutineScope(Dispatchers.IO).launch {
-            dbRoutes = roomRepository.getAllRoutes()
-            firebaseRepository.dumpDataFromFirebase()
-        }
+        firebaseRepository.dumpDataFromFirebase()
     }
 }

@@ -8,7 +8,7 @@ import com.buigues.ortola.touristics.model.dao.RouteDao
 import com.buigues.ortola.touristics.model.entity.PointOfInterest
 import com.buigues.ortola.touristics.model.entity.Route
 
-@Database(entities = [Route::class, PointOfInterest::class], version = 1)
+@Database(entities = [Route::class, PointOfInterest::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase()
 {
     abstract val routeDao: RouteDao
