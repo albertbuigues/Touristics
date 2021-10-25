@@ -39,9 +39,8 @@ class FirebaseRepository @Inject constructor(private val application: Applicatio
             CoroutineScope(Dispatchers.IO).launch {
                 AppDatabase.getInstance(application).routeDao.insertRoute(route)
             }
+            getRoutePoints(id)
         }
-        getRoutePoints("0")
-        getRoutePoints("1")
     }
 
     private fun getRoutePoints(routeId: String) {
@@ -53,13 +52,13 @@ class FirebaseRepository @Inject constructor(private val application: Applicatio
                 val id = counter
                 counter++
                 val pointOfInterest = PointOfInterest(
-                    id = id,
-                    title = dataMap["title"].toString(),
-                    description = dataMap["description"].toString(),
-                    latitude = dataMap["latitude"].toString().toDouble(),
-                    longitude = dataMap["longitude"].toString().toDouble(),
-                    imageUrl = dataMap["imageUrl"].toString(),
-                    routeId = routeIdToInsert
+                id = id,
+                title = dataMap["title"].toString(),
+                description = dataMap["description"].toString(),
+                latitude = dataMap["latitude"].toString().toDouble(),
+                longitude = dataMap["longitude"].toString().toDouble(),
+                imageUrl = dataMap["imageUrl"].toString(),
+                routeId = routeIdToInsert
                 )
                 listOfPoints.add(id, pointOfInterest)
                 if (pointsArray.children.count() == listOfPoints.size) {

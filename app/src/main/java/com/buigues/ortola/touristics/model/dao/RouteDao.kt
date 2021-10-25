@@ -16,7 +16,7 @@ interface RouteDao
     suspend fun insertRoute(route: Route)
 
     @Query("SELECT * FROM routes_tbl")
-    fun getAllRoutes(): List<Route>
+    suspend fun getAllRoutes(): List<Route>
 
     @Insert
     suspend fun insertRoutePoints(points: List<PointOfInterest>)
