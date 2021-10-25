@@ -13,9 +13,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var firebaseRepository: FirebaseRepository
-    private lateinit var routesListViewModel: RoutesListViewModel
-    private val app = TouristicsApp()
+    private val firebaseRepository by lazy { FirebaseRepository(application) }
+    private val routesListViewModel by lazy { RoutesListViewModel(application) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         CoroutineScope(Dispatchers.IO).launch {
-            firebaseRepository = FirebaseRepository(app)
             firebaseRepository.dumpDataFromFirebase()
         }
 
@@ -31,9 +29,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
+        var adapter = RoutesListAdapter(emptyList())
         val recyclerView = binding.recyclerRoutes
-        routesListViewModel = RoutesListViewModel(app)
-        val adapter = RoutesListAdapter(routesListViewModel.getAllRoutes())
+        CoroutineScope(Dispatchers.IO).launch { adapter = RoutesListAdapter(routesListViewModel.getAllRoutes()) }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
