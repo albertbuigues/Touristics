@@ -1,15 +1,15 @@
-package com.buigues.ortola.touristics.repository
+package com.buigues.ortola.touristics.model.repository
 
-import android.app.Application
-import com.buigues.ortola.touristics.model.database.AppDatabase
+import com.buigues.ortola.touristics.model.dao.RouteDao
 import com.buigues.ortola.touristics.model.entity.PointOfInterest
 import com.buigues.ortola.touristics.model.entity.Route
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FirebaseRepository (private val application: Application)
+class FirebaseRepository @Inject constructor(private val routeDao: RouteDao)
 {
     private var counter = 0
     private val listOfPoints: MutableList<PointOfInterest> = mutableListOf()
@@ -33,7 +33,7 @@ class FirebaseRepository (private val application: Application)
                 imageUrl = dataMap["imageUrl"].toString()
             )
             CoroutineScope(Dispatchers.IO).launch {
-                AppDatabase.getInstance(application).routeDao.insertRoute(route)
+                routeDao.insertRoute(route)
             }
             getRoutePoints(id)
         }
@@ -59,7 +59,7 @@ class FirebaseRepository (private val application: Application)
                 listOfPoints.add(id, pointOfInterest)
                 if (pointsArray.children.count() == listOfPoints.size) {
                     CoroutineScope(Dispatchers.IO).launch {
-                        AppDatabase.getInstance(application).routeDao.insertRoutePoints(listOfPoints)
+                        routeDao.insertRoutePoints(listOfPoints)
                     }
                 }
             }

@@ -1,10 +1,11 @@
-package com.buigues.ortola.touristics
+package com.buigues.ortola.touristics.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.buigues.ortola.touristics.databinding.ActivityMainBinding
+import com.buigues.ortola.touristics.viewmodel.RoutesListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,8 +15,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: RoutesListViewModel by viewModels()
     private lateinit var adapter: RoutesListAdapter
+    private val routesListViewModel: RoutesListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerRoutes
         CoroutineScope(Dispatchers.IO).launch {
-            adapter = RoutesListAdapter(viewModel.getRoutes())
+            adapter = RoutesListAdapter(routesListViewModel.dbRoutes)
         }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter

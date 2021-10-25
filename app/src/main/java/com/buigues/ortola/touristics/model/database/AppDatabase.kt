@@ -12,22 +12,4 @@ import com.buigues.ortola.touristics.model.entity.Route
 abstract class AppDatabase: RoomDatabase()
 {
     abstract val routeDao: RouteDao
-
-    companion object {
-
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this){
-                val tempInstance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "myDatabase"
-                ).build()
-                INSTANCE = tempInstance
-                tempInstance
-            }
-        }
-    }
 }

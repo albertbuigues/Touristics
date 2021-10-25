@@ -1,4 +1,4 @@
-package com.buigues.ortola.touristics
+package com.buigues.ortola.touristics.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
