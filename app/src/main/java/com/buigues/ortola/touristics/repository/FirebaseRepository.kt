@@ -15,6 +15,9 @@ import javax.inject.Singleton
 @Singleton
 class FirebaseRepository @Inject constructor(private val application: Application)
 {
+    private var counter = 0
+    private val listOfPoints: MutableList<PointOfInterest> = mutableListOf()
+
     fun dumpDataFromFirebase() {
         getRouteFromId("0")
         getRouteFromId("1")
@@ -33,22 +36,22 @@ class FirebaseRepository @Inject constructor(private val application: Applicatio
                 historicPeriod = dataMap["historicPeriod"].toString(),
                 imageUrl = dataMap["imageUrl"].toString()
             )
-            getRoutePoints(route,"0")
-            getRoutePoints( route,"1")
             CoroutineScope(Dispatchers.IO).launch {
                 AppDatabase.getInstance(application).routeDao.insertRoute(route)
             }
         }
+        getRoutePoints("0")
+        getRoutePoints("1")
     }
 
-    private fun getRoutePoints(route: Route, routeId: String) {
+    private fun getRoutePoints(routeId: String) {
         val dbReference = FirebaseDatabase.getInstance().getReference("/routes/$routeId")
-        val listOfPoints: MutableList<PointOfInterest> = mutableListOf()
         dbReference.child("pointsOfInterest").get().addOnSuccessListener { pointsArray ->
             pointsArray.children.forEach { point ->
                 val dataMap = point.value as Map<*, *>
                 val routeIdToInsert = routeId.toInt()
-                val id = point.key!!.toInt()
+                val id = counter
+                counter++
                 val pointOfInterest = PointOfInterest(
                     id = id,
                     title = dataMap["title"].toString(),
