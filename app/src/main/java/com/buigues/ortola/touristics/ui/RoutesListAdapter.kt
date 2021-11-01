@@ -2,6 +2,7 @@ package com.buigues.ortola.touristics.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.UiThread
 import androidx.recyclerview.widget.RecyclerView
 import com.buigues.ortola.touristics.databinding.RouteItemBinding
 import com.buigues.ortola.touristics.model.entity.Route
