@@ -6,8 +6,7 @@ import javax.inject.Inject
 
 class RoomRepository @Inject constructor(private val routeDao: RouteDao)
 {
-
-    fun getAllRoutes(): List<Route>{
+    suspend fun getAllRoutes(): List<Route>{
         return routeDao.getAllRoutes()
     }
 }

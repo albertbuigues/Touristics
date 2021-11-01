@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerRoutes
-        myAdapter = RoutesListAdapter(routesListViewModel.dbRoutes)
+        myAdapter = RoutesListAdapter(routesListViewModel.routes)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = myAdapter
     }

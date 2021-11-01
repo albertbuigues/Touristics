@@ -12,13 +12,7 @@ import androidx.room.ForeignKey.CASCADE
         childColumns = ["route_id"],
         onDelete = CASCADE,
         onUpdate = CASCADE
-    )],
-    indices = [
-        Index(
-            value = ["route_id"],
-            name = "route_id_routes",
-            unique = true)
-    ])
+    )])
 data class PointOfInterest(
     @PrimaryKey(autoGenerate = false) val id: Int,
     @ColumnInfo(name = "title") val title: String,
