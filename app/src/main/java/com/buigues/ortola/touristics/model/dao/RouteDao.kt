@@ -1,5 +1,6 @@
 package com.buigues.ortola.touristics.model.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.IGNORE
@@ -15,7 +16,7 @@ interface RouteDao
     fun insertRoute(route: Route)
 
     @Query("SELECT * FROM routes_tbl")
-    suspend fun getAllRoutes(): List<Route>
+    fun getAllRoutes(): LiveData<List<Route>>
 
     @Insert
     fun insertRoutePoints(points: List<PointOfInterest>)

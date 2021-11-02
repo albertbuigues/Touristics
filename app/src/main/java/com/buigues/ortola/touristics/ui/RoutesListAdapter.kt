@@ -1,22 +1,25 @@
 package com.buigues.ortola.touristics.ui
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.UiThread
 import androidx.recyclerview.widget.RecyclerView
 import com.buigues.ortola.touristics.databinding.RouteItemBinding
 import com.buigues.ortola.touristics.model.entity.Route
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 
-class RoutesListAdapter(private var routesList: List<Route>): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHolder>()
+class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHolder>()
 {
+    private var routesList = emptyList<Route>()
 
     class RoutesViewHolder(private val binding: RouteItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(route: Route) {
             binding.routeTitleTv.text = route.title
             binding.routePeriodTv.text = route.historicPeriod
-            Picasso.get().load(route.imageUrl).into(binding.routeImageView)
+            Glide.with(binding.root.context).load(route.imageUrl).into(binding.routeImageView)
         }
     }
 
@@ -31,6 +34,12 @@ class RoutesListAdapter(private var routesList: List<Route>): RecyclerView.Adapt
 
     override fun getItemCount(): Int {
         return routesList.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(routes:List<Route>) {
+        this.routesList = routes
+        notifyDataSetChanged()
     }
 
 }

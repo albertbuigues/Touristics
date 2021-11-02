@@ -1,5 +1,6 @@
 package com.buigues.ortola.touristics.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.buigues.ortola.touristics.model.entity.Route
@@ -16,16 +17,10 @@ class RoutesListViewModel @Inject constructor(
     firebaseRepository: FirebaseRepository,
 ) : ViewModel()
 {
-    var routes: List<Route> = emptyList()
+    val routes: LiveData<List<Route>>
 
     init {
         firebaseRepository.dumpDataFromFirebase()
-        viewModelScope.launch(Dispatchers.IO) {
-            routes = getAllRoutes(roomRepository)
-        }
-    }
-
-    private suspend fun getAllRoutes(repository: RoomRepository): List<Route>{
-        return repository.getAllRoutes()
+        routes = roomRepository.listOfRoutes
     }
 }

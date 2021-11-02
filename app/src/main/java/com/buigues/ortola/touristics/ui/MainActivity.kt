@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val routesListViewModel: RoutesListViewModel by viewModels()
-    private lateinit var myAdapter: RoutesListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +24,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecycler() {
         val recyclerView = binding.recyclerRoutes
-        myAdapter = RoutesListAdapter(routesListViewModel.routes)
+        val routesAdapter = RoutesListAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = myAdapter
+        recyclerView.adapter = routesAdapter
+        routesListViewModel.routes.observe(this, {route -> routesAdapter.setData(route)})
     }
 }
