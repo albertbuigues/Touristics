@@ -2,66 +2,115 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_cardview"
     android:layout_width="380dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/always_visible_layout"
+    <LinearLayout
+        android:id="@+id/portions_holder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/route_image_view"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fixed_portion_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
 
-        <TextView
-            android:id="@+id/route_title_tv"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/route_image_view"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/routeimage"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/route_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/primaryColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/route_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Here goes the title" />
+
+            <ImageView
+                android:id="@+id/expand_icon_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/route_period_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic__expand_more"
+                android:contentDescription="@string/arrow_icon" />
+
+            <TextView
+                android:id="@+id/route_period_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/primaryLightColor"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Historic Period" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/expandible_portion_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/primaryColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/route_image_view"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Here goes the title" />
+            android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/expand_icon_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@id/route_period_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic__expand_more" />
+            <TextView
+                android:id="@+id/route_description_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"
+                tools:text="Here goes the description"
+                android:textSize="13sp"
+                android:textColor="@color/primaryColor"
+                android:fontFamily="serif"
+                android:padding="5dp"/>
 
-        <TextView
-            android:id="@+id/route_period_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/primaryLightColor"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Historic Period" />
+            <Button
+                android:id="@+id/start_route_btn"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:backgroundTint="@color/primaryLightColor"
+                android:layout_marginTop="15dp"
+                android:text="@string/start_route"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/route_description_tv" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

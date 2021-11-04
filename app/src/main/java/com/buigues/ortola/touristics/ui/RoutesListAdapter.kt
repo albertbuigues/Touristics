@@ -25,10 +25,27 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
 
     class RoutesViewHolder(private val binding: RouteItemBinding): RecyclerView.ViewHolder(binding.root) {
 
+        val arrowIcon: ImageView = binding.expandIconImage
+        private val detailsPortion: ConstraintLayout = binding.expandiblePortionLayout
+        var isExpanded: Boolean = false
+
         fun bind(route: Route) {
             binding.routeTitleTv.text = route.title
             binding.routePeriodTv.text = route.historicPeriod
+            binding.routeDescriptionTv.text = route.description
             Glide.with(binding.root.context).load(route.imageUrl).into(binding.routeImageView)
+        }
+
+        fun expandOrHideRouteDetails() {
+            if (!isExpanded) {
+                detailsPortion.visibility = View.VISIBLE
+                isExpanded = true
+                arrowIcon.setImageResource(R.drawable.ic_expand_less)
+            } else {
+                detailsPortion.visibility = View.GONE
+                isExpanded = false
+                arrowIcon.setImageResource(R.drawable.ic__expand_more)
+            }
         }
 
     }
@@ -40,6 +57,9 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
 
     override fun onBindViewHolder(holder: RoutesViewHolder, position: Int) {
         holder.bind(routesList[position])
+        holder.arrowIcon.setOnClickListener {
+            holder.expandOrHideRouteDetails()
+        }
     }
 
     override fun getItemCount(): Int {
