@@ -28,7 +28,6 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
         fun bind(route: Route) {
             binding.routeTitleTv.text = route.title
             binding.routePeriodTv.text = route.historicPeriod
-            binding.routeDescriptionTv.text = route.description
             Glide.with(binding.root.context).load(route.imageUrl).into(binding.routeImageView)
         }
 
