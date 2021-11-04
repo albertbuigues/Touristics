@@ -25,10 +25,6 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
 
     class RoutesViewHolder(private val binding: RouteItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        val expandableLayout: ConstraintLayout = binding.expandableLayout
-        val expandIcon: ImageView = binding.expandIconImage
-        var isExpanded: Boolean = false
-
         fun bind(route: Route) {
             binding.routeTitleTv.text = route.title
             binding.routePeriodTv.text = route.historicPeriod
@@ -36,23 +32,6 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
             Glide.with(binding.root.context).load(route.imageUrl).into(binding.routeImageView)
         }
 
-        fun expandRouteDetails() {
-            if (!isExpanded) {
-                expandableLayout.visibility = View.VISIBLE
-                val animationRotate = RotateAnimation(0F, 180F, Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-                animationRotate.duration = 250
-                animationRotate.repeatCount = 0
-                expandIcon.startAnimation(animationRotate)
-                isExpanded = true
-            } else {
-                expandableLayout.visibility = View.GONE
-                val animationRotate = RotateAnimation(180F, 0F, Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-                animationRotate.duration = 250
-                animationRotate.repeatCount = 0
-                expandIcon.startAnimation(animationRotate)
-                isExpanded = false
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutesViewHolder {
@@ -62,10 +41,6 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
 
     override fun onBindViewHolder(holder: RoutesViewHolder, position: Int) {
         holder.bind(routesList[position])
-        holder.expandIcon.setOnClickListener {
-            holder.expandRouteDetails()
-            notifyItemChanged(position)
-        }
     }
 
     override fun getItemCount(): Int {
