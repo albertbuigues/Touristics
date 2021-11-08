@@ -3,6 +3,9 @@ package com.buigues.ortola.touristics.ui
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +15,10 @@ import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.buigues.ortola.touristics.R
 import com.buigues.ortola.touristics.databinding.RouteItemBinding
@@ -26,6 +32,7 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
     class RoutesViewHolder(private val binding: RouteItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         val arrowIcon: ImageView = binding.expandIconImage
+        val startRouteButton = binding.startRouteBtn
         private val detailsPortion: ConstraintLayout = binding.expandiblePortionLayout
         var isExpanded: Boolean = false
 
@@ -48,6 +55,28 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
             }
         }
 
+        fun checkPermission(permission: String) {
+            if (ContextCompat.checkSelfPermission(binding.root.context, permission) != PackageManager.PERMISSION_GRANTED) {
+                // The permission has not been yet granted by the user
+                TODO("Request permission")
+            }
+        }
+
+        private fun requestPermissions(arrayOfPermissions: Array<String>) {
+            for (permission in arrayOfPermissions) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity(), permission)) {
+                    // The user has already rejected
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity(), arrayOf(permission), )
+                }
+            }
+        }
+
+        fun navigateToMap() {
+            val mapsIntent = Intent(binding.root.context, MapsActivity::class.java)
+            ContextCompat.startActivity(binding.root.context, mapsIntent, Bundle())
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutesViewHolder {
@@ -59,6 +88,9 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
         holder.bind(routesList[position])
         holder.arrowIcon.setOnClickListener {
             holder.expandOrHideRouteDetails()
+        }
+        holder.startRouteButton.setOnClickListener {
+            holder.navigateToMap()
         }
     }
 

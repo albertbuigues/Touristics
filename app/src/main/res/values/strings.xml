@@ -3,4 +3,5 @@
     <string name="start_route">Començar ruta</string>
     <string name="routeimage">routeImage</string>
     <string name="arrow_icon">Arrow Icon</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
