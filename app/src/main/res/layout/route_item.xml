@@ -12,7 +12,8 @@
         android:id="@+id/portions_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fixed_portion_layout"
