@@ -13,12 +13,9 @@ import androidx.core.content.ContextCompat
 import com.buigues.ortola.touristics.R
 import com.buigues.ortola.touristics.databinding.ActivityMapsBinding
 
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
