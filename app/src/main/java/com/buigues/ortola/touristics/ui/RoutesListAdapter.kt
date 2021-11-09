@@ -1,10 +1,12 @@
 package com.buigues.ortola.touristics.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -52,23 +54,6 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
                 detailsPortion.visibility = View.GONE
                 isExpanded = false
                 arrowIcon.setImageResource(R.drawable.ic__expand_more)
-            }
-        }
-
-        fun checkPermission(permission: String) {
-            if (ContextCompat.checkSelfPermission(binding.root.context, permission) != PackageManager.PERMISSION_GRANTED) {
-                // The permission has not been yet granted by the user
-                TODO("Request permission")
-            }
-        }
-
-        private fun requestPermissions(arrayOfPermissions: Array<String>) {
-            for (permission in arrayOfPermissions) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity(), permission)) {
-                    // The user has already rejected
-                } else {
-                    ActivityCompat.requestPermissions(MainActivity(), arrayOf(permission), )
-                }
             }
         }
 
