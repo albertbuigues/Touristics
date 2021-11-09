@@ -4,6 +4,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.secrets_gradle_plugin' version '0.5'
 }
 
 android {
@@ -61,4 +62,7 @@ dependencies {
     // Hilt
     implementation 'com.google.dagger:hilt-android:2.39.1'
     kapt 'com.google.dagger:hilt-compiler:2.39.1'
+    // GMS
+    implementation('com.google.android.gms:play-services-location:18.0.0')
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
 }
