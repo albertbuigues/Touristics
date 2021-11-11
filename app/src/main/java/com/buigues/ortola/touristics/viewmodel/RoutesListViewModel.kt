@@ -3,6 +3,7 @@ package com.buigues.ortola.touristics.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.buigues.ortola.touristics.model.entity.PointOfInterest
 import com.buigues.ortola.touristics.model.entity.Route
 import com.buigues.ortola.touristics.model.repository.FirebaseRepository
 import com.buigues.ortola.touristics.model.repository.RoomRepository
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RoutesListViewModel @Inject constructor(
-    roomRepository: RoomRepository,
+    private val roomRepository: RoomRepository,
     firebaseRepository: FirebaseRepository,
 ) : ViewModel()
 {
@@ -22,5 +23,9 @@ class RoutesListViewModel @Inject constructor(
     init {
         firebaseRepository.dumpDataFromFirebase()
         routes = roomRepository.listOfRoutes
+    }
+
+    fun getPointsByRouteId(routeId: Int): LiveData<List<PointOfInterest>> {
+        return roomRepository.getPointsByRouteId(routeId)
     }
 }
