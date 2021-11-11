@@ -57,8 +57,9 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
             }
         }
 
-        fun navigateToMap() {
+        fun navigateToMap(routeId: Int) {
             val mapsIntent = Intent(binding.root.context, MapsActivity::class.java)
+            mapsIntent.putExtra("routeId", routeId)
             ContextCompat.startActivity(binding.root.context, mapsIntent, Bundle())
         }
 
@@ -75,7 +76,7 @@ class RoutesListAdapter(): RecyclerView.Adapter<RoutesListAdapter.RoutesViewHold
             holder.expandOrHideRouteDetails()
         }
         holder.startRouteButton.setOnClickListener {
-            holder.navigateToMap()
+            holder.navigateToMap(routesList[position].id)
         }
     }
 

@@ -9,5 +9,5 @@ import com.buigues.ortola.touristics.model.entity.PointOfInterest
 interface PointsDao
 {
     @Query("SELECT * FROM points_tbl WHERE route_id = :routeId")
-    fun getRoutePoints(routeId: Int): LiveData<List<PointOfInterest>>
+    suspend fun getRoutePoints(routeId: Int): List<PointOfInterest>
 }

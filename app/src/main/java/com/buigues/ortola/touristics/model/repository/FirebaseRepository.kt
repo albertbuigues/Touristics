@@ -58,7 +58,7 @@ class FirebaseRepository @Inject constructor(private val routeDao: RouteDao)
                 )
                 listOfPoints.add(id, pointOfInterest)
                 if (pointsArray.children.count() == listOfPoints.size) {
-                    Thread {
+                    CoroutineScope(Dispatchers.IO).launch {
                         routeDao.insertRoutePoints(listOfPoints)
                     }
                 }

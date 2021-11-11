@@ -3,23 +3,32 @@ package com.buigues.ortola.touristics.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.buigues.ortola.touristics.R
 import com.buigues.ortola.touristics.databinding.ActivityMapsBinding
-import com.buigues.ortola.touristics.viewmodel.RoutesListViewModel
+import com.buigues.ortola.touristics.model.entity.PointOfInterest
+import com.buigues.ortola.touristics.viewmodel.MapsViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -27,7 +36,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<Array<String>>
     private val permissions = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val routesListViewModel: RoutesListViewModel by viewModels()
+    private val mapsViewModel: MapsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +79,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        val listOfPoints = getRoutePoints()
+        for (point in listOfPoints) {
+            mMap.addMarker(MarkerOptions().position(LatLng( point.latitude, point.longitude)))
+            if (point == listOfPoints[0]) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 18f))
+            }
+        }
     }
 
     private fun requestLocationPermissions() {
@@ -89,5 +105,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun getBackToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun getRouteId(): Int {
+        return intent.getIntExtra("routeId", 0)
+    }
+
+    // Gets the points from room repository through ViewModel
+    private fun getRoutePoints(): List<PointOfInterest> {
+        val route = getRouteId()
+        var points = emptyList<PointOfInterest>()
+        CoroutineScope(Dispatchers.IO).launch {
+            points = mapsViewModel.getRoutePoints(route)
+        }
+        return points
     }
 }

@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RoutesListViewModel @Inject constructor(
-    private val roomRepository: RoomRepository,
+    roomRepository: RoomRepository,
     firebaseRepository: FirebaseRepository,
 ) : ViewModel()
 {
@@ -23,9 +23,5 @@ class RoutesListViewModel @Inject constructor(
     init {
         firebaseRepository.dumpDataFromFirebase()
         routes = roomRepository.listOfRoutes
-    }
-
-    fun getPointsByRouteId(routeId: Int): LiveData<List<PointOfInterest>> {
-        return roomRepository.getPointsByRouteId(routeId)
     }
 }

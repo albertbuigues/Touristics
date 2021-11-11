@@ -11,7 +11,7 @@ class RoomRepository @Inject constructor(routeDao: RouteDao, private val pointsD
 {
     val listOfRoutes: LiveData<List<Route>> = routeDao.getAllRoutes()
 
-    fun getPointsByRouteId(routeId: Int): LiveData<List<PointOfInterest>> {
+    suspend fun getPointsByRouteId(routeId: Int): List<PointOfInterest> {
         return pointsDao.getRoutePoints(routeId)
     }
 }

@@ -13,11 +13,11 @@ import com.buigues.ortola.touristics.model.entity.Route
 interface RouteDao
 {
     @Insert(onConflict = IGNORE)
-    fun insertRoute(route: Route)
+    suspend fun insertRoute(route: Route)
 
     @Query("SELECT * FROM routes_tbl")
     fun getAllRoutes(): LiveData<List<Route>>
 
     @Insert
-    fun insertRoutePoints(points: List<PointOfInterest>)
+    suspend fun insertRoutePoints(points: List<PointOfInterest>)
 }
