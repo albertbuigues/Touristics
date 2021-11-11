@@ -2,6 +2,7 @@ package com.buigues.ortola.touristics.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.buigues.ortola.touristics.model.dao.PointsDao
 import com.buigues.ortola.touristics.model.dao.RouteDao
 import com.buigues.ortola.touristics.model.database.AppDatabase
 import com.buigues.ortola.touristics.model.repository.FirebaseRepository
@@ -30,4 +31,8 @@ object AppModule
     @Singleton
     @Provides
     fun provideRoutesDao(db: AppDatabase): RouteDao = db.routeDao
+
+    @Singleton
+    @Provides
+    fun providePointsDao(db: AppDatabase): PointsDao = db.pointsDao
 }
