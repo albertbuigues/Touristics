@@ -2,6 +2,7 @@ package com.buigues.ortola.touristics.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.buigues.ortola.touristics.R
 import com.buigues.ortola.touristics.model.dao.PointsDao
 import com.buigues.ortola.touristics.model.dao.RouteDao
 import com.buigues.ortola.touristics.model.database.AppDatabase
@@ -25,7 +26,9 @@ object AppModule
             appContext,
             AppDatabase::class.java,
             "myDatabase"
-        ).build()
+        )
+            .createFromAsset("assets/database/myDatabase.db")
+            .build()
     }
 
     @Singleton
