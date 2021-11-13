@@ -1,7 +1,10 @@
 package com.buigues.ortola.touristics.model.entity
 
-import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.NO_ACTION
+import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "points_tbl",
@@ -10,8 +13,8 @@ import androidx.room.ForeignKey.CASCADE
         entity = Route::class,
         parentColumns = ["id"],
         childColumns = ["route_id"],
-        onDelete = CASCADE,
-        onUpdate = CASCADE
+        onDelete = NO_ACTION,
+        onUpdate = NO_ACTION
     )])
 data class PointOfInterest(
     @PrimaryKey(autoGenerate = false) val id: Int,

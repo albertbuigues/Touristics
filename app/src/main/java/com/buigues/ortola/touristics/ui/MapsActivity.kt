@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +82,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         lifecycleScope.launch {
             val listOfPoints = getRoutePoints()
             for (point in listOfPoints) {
-                mMap.addMarker(MarkerOptions().position(LatLng( point.latitude, point.longitude)))
+                mMap.addMarker(MarkerOptions()
+                    .position(LatLng( point.latitude, point.longitude))
+                    .icon(BitmapDescriptorFactory.defaultMarker(
+                        BitmapDescriptorFactory.HUE_AZURE
+                    ))
+                )
                 if (point == listOfPoints[0]) {
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 18f))
                 }
