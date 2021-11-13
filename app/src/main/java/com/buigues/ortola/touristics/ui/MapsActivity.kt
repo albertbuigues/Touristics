@@ -79,15 +79,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(this))
+
         lifecycleScope.launch {
             val listOfPoints = getRoutePoints()
             for (point in listOfPoints) {
-                mMap.addMarker(MarkerOptions()
+                val marker = mMap.addMarker(MarkerOptions()
                     .position(LatLng( point.latitude, point.longitude))
                     .icon(BitmapDescriptorFactory.defaultMarker(
                         BitmapDescriptorFactory.HUE_AZURE
                     ))
+                    .title(point.title)
                 )
+
+                if (marker != null) {
+                    marker.tag = point
+                }
+
                 if (point == listOfPoints[0]) {
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 18f))
                 }

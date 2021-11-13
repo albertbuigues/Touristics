@@ -4,4 +4,5 @@
     <string name="routeimage">routeImage</string>
     <string name="arrow_icon">Arrow Icon</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="marker_image">marker image</string>
 </resources>

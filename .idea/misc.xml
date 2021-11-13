@@ -5,8 +5,13 @@
       <map>
         <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/drawable/ic__expand_more.xml" value="0.5703125" />
         <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/drawable/ic_expand_less.xml" value="0.5703125" />
+        <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/drawable/ic_pause.xml" value="0.5703125" />
+        <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/drawable/ic_play.xml" value="0.5703125" />
+        <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/drawable/ic_rewind.xml" value="0.5703125" />
+        <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/drawable/ic_stop.xml" value="0.5703125" />
         <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/layout/activity_maps.xml" value="0.48641304347826086" />
+        <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/layout/marker_content.xml" value="0.4624094202898551" />
         <entry key="..\:/Users/Usuario/Documents/projectes/android_projects/Touristics/app/src/main/res/layout/route_item.xml" value="0.5" />
       </map>
     </option>

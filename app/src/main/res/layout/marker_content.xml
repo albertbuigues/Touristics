@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/marker_info_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_margin="10dp"
+    android:background="@color/secondaryLightColor"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/marker_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Marker Title"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/primaryColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:id="@+id/marker_image"
+        android:layout_width="match_parent"
+        android:contentDescription="@string/marker_image"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <LinearLayout
+        android:id="@+id/player_buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/marker_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/marker_pause_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pause"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/marker_stop_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_stop"
+            android:layout_marginEnd="10dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
