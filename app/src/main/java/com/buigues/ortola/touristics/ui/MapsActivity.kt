@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.buigues.ortola.touristics.R
 import com.buigues.ortola.touristics.databinding.ActivityMapsBinding
 import com.buigues.ortola.touristics.model.entity.PointOfInterest
@@ -24,8 +25,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -79,11 +78,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val listOfPoints = getRoutePoints()
-        for (point in listOfPoints) {
-            mMap.addMarker(MarkerOptions().position(LatLng( point.latitude, point.longitude)))
-            if (point == listOfPoints[0]) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 18f))
+        lifecycleScope.launch {
+            val listOfPoints = getRoutePoints()
+            for (point in listOfPoints) {
+                mMap.addMarker(MarkerOptions().position(LatLng( point.latitude, point.longitude)))
+                if (point == listOfPoints[0]) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 18f))
+                }
             }
         }
     }
@@ -112,12 +113,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     // Gets the points from room repository through ViewModel
-    private fun getRoutePoints(): List<PointOfInterest> {
+    private suspend fun getRoutePoints(): List<PointOfInterest> {
         val route = getRouteId()
-        var points = emptyList<PointOfInterest>()
-        CoroutineScope(Dispatchers.IO).launch {
-            points = mapsViewModel.getRoutePoints(route)
-        }
-        return points
+        return mapsViewModel.getRoutePoints(route)
     }
 }
