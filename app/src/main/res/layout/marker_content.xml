@@ -21,12 +21,13 @@
         android:textAlignment="center"/>
 
     <ImageView
+        android:padding="3dp"
         android:layout_marginTop="5dp"
         android:id="@+id/marker_image"
         android:layout_width="match_parent"
         android:contentDescription="@string/marker_image"
         android:layout_height="100dp"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <LinearLayout
