@@ -30,35 +30,4 @@
         android:scaleType="centerInside"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <LinearLayout
-        android:id="@+id/player_buttons_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:padding="8dp">
-
-        <ImageView
-            android:id="@+id/marker_play_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_play"
-            android:layout_marginEnd="10dp"/>
-
-        <ImageView
-            android:id="@+id/marker_pause_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_pause"
-            android:layout_marginEnd="10dp"/>
-
-        <ImageView
-            android:id="@+id/marker_stop_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_stop"
-            android:layout_marginEnd="10dp"/>
-
-    </LinearLayout>
-
 </LinearLayout>
