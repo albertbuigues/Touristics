@@ -1,8 +1,10 @@
 package com.buigues.ortola.touristics.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 @AndroidEntryPoint
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -87,7 +90,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val marker = mMap.addMarker(MarkerOptions()
                     .position(LatLng( point.latitude, point.longitude))
                     .icon(BitmapDescriptorFactory.defaultMarker(
-                        BitmapDescriptorFactory.HUE_AZURE
+                        BitmapDescriptorFactory.HUE_YELLOW
                     ))
                     .title(point.title)
                 )
@@ -97,7 +100,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
                 if (point == listOfPoints[0]) {
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 18f))
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(point.latitude, point.longitude), 13f))
                 }
             }
         }

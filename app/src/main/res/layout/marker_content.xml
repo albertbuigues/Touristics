@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:contentDescription="@string/marker_image"
         android:layout_height="100dp"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 </LinearLayout>
