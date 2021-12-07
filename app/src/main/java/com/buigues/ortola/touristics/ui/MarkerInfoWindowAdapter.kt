@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Looper
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,9 @@ class MarkerInfoWindowAdapter (private val context: Context): GoogleMap.InfoWind
         // 2nd - Inflate view and set values
 
         window.findViewById<TextView>(R.id.marker_title).text = pointOfInterest.title
+        window.findViewById<TextView>(R.id.marker_description).text = pointOfInterest.description
+        window.findViewById<TextView>(R.id.marker_description).movementMethod = ScrollingMovementMethod()
+
 
         val image = window.findViewById<ImageView>(R.id.marker_image)
         Glide
